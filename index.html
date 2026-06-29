@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Better Earthlings — Premium Lifestyle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f8f7f4; --white:rgba(255,255,255,0.72); --ink:#1a1f1c; --muted:#6b756b;
+      --sage:#8fa083; --olive:#4f6548; --moss:#1e2b1e; --sand:#e8dfcf; --clay:#b88362;
+      --gold:#b9a16b; --line:rgba(29,36,31,.08); --shadow: 0 30px 90px rgba(29,36,31,.12);
+      --shadow-soft: 0 18px 55px rgba(29,36,31,.08); --radius: 32px;
+      --transition: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    *{box-sizing:border-box; margin:0; padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background: var(--paper); color:var(--ink);
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      letter-spacing:-0.02em; overflow-x:hidden;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .mesh-bg{
+      position:fixed; inset:0; z-index:-1;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(143,160,131,0.15), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(232,223,207,0.6), transparent 50%),
+        radial-gradient(ellipse 50% 60% at 50% 80%, rgba(185,161,107,0.08), transparent 50%),
+        linear-gradient(180deg, #fff 0%, var(--paper) 50%, #fff 100%);
+      animation: meshShift 20s ease-in-out infinite alternate;
+    }
+    @keyframes meshShift{
+      0%{ filter: hue-rotate(0deg); transform: scale(1); }
+      50%{ filter: hue-rotate(5deg); transform: scale(1.02); }
+      100%{ filter: hue-rotate(0deg); transform: scale(1); }
+    }
+    .particle{
+      position:fixed; border-radius:50%;
+      background: radial-gradient(circle, rgba(143,160,131,0.3), transparent 70%);
+      pointer-events:none; z-index:0; filter: blur(40px);
+    }
+    .p1{ width:400px; height:400px; top:-100px; left:-100px; animation: float1 15s ease-in-out infinite; }
+    .p2{ width:300px; height:300px; top:40%; right:-80px; animation: float2 18s ease-in-out infinite; }
+    .p3{ width:250px; height:250px; bottom:10%; left:20%; animation: float3 20s ease-in-out infinite; }
+    .p4{ width:180px; height:180px; top:60%; left:60%; animation: float4 22s ease-in-out infinite; }
+    @keyframes float1{ 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(30px, 50px) scale(1.1); } 66%{ transform: translate(-20px, 30px) scale(0.9); } }
+    @keyframes float2{ 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(-40px, -30px) scale(1.15); } 66%{ transform: translate(20px, -50px) scale(0.85); } }
+    @keyframes float3{ 0%,100%{ transform: translate(0,0) scale(1); } 50%{ transform: translate(60px, -40px) scale(1.1); } }
+    @keyframes float4{ 0%,100%{ transform: translate(0,0) scale(1); } 25%{ transform: translate(-30px, 20px) scale(1.05); } 75%{ transform: translate(30px, -20px) scale(0.95); } }
+
+    .serif{font-family: 'DM Serif Display', Georgia, serif; letter-spacing:-0.03em; font-weight:400}
+    .mono{font-family: 'Space Grotesk', monospace; letter-spacing:0.05em}
+    .wrap{width:min(1200px, calc(100% - 48px)); margin:0 auto}
+
+    .nav{
+      position:sticky; top:0; z-index:100;
+      backdrop-filter: blur(24px) saturate(1.8);
+      -webkit-backdrop-filter: blur(24px) saturate(1.8);
+      background: rgba(251,250,247,0.65);
+      border-bottom:1px solid rgba(29,36,31,0.06);
+      transition: all 0.4s var(--transition);
+    }
+    .nav.scrolled{ background: rgba(251,250,247,0.85); box-shadow: 0 4px 30px rgba(29,36,31,0.06); }
+    .nav-inner{height:80px; display:flex; align-items:center; justify-content:space-between; gap:24px}
+    .brand{display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--ink); transition: transform 0.3s var(--transition)}
+    .brand:hover{ transform: scale(1.02); }
+    .mark{
+      width:44px; height:44px; border-radius:50%; position:relative;
+      background: linear-gradient(145deg, rgba(143,160,131,0.2), rgba(255,255,255,0.8));
+      border:1px solid rgba(38,61,43,0.1);
+      box-shadow: inset 0 0 0 7px rgba(143,160,131,0.1), 0 12px 30px rgba(38,61,43,0.08);
+      overflow:hidden; transition: all 0.4s var(--transition);
+    }
+    .mark:hover{ transform: rotate(15deg) scale(1.1); }
+    .mark:before{content:""; position:absolute; width:26px; height:26px; border-radius:50% 50% 50% 8px; background:linear-gradient(135deg, var(--olive), var(--sage)); left:9px; top:9px; transform:rotate(-20deg)}
+    .mark:after{content:""; position:absolute; width:1px; height:24px; background:rgba(255,255,255,0.7); left:22px; top:10px; transform:rotate(25deg)}
+    .brand strong{font-size:15px; text-transform:uppercase; letter-spacing:0.14em; font-weight:700}
+    .nav-links{display:flex; align-items:center; gap:32px; color:var(--muted); font-size:14px; font-weight:500}
+    .nav-links a{color:inherit; text-decoration:none; position:relative; padding:4px 0; transition: color 0.3s}
+    .nav-links a::after{ content:''; position:absolute; bottom:0; left:0; width:0; height:1.5px; background: var(--olive); transition: width 0.4s var(--transition); }
+    .nav-links a:hover{color:var(--ink)}
+    .nav-links a:hover::after{width:100%}
+    .pill{
+      border:1px solid rgba(38,61,43,0.12); border-radius:999px; padding:12px 22px;
+      color:var(--moss)!important; background: rgba(255,255,255,0.6);
+      box-shadow: 0 8px 24px rgba(38,61,43,0.06), inset 0 0 0 1px rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px); transition: all 0.3s var(--transition)!important;
+      position:relative; overflow:hidden;
+    }
+    .pill::before{ content:''; position:absolute; inset:0; background: linear-gradient(135deg, rgba(143,160,131,0.1), transparent); opacity:0; transition: opacity 0.3s; }
+    .pill:hover{ transform: translateY(-2px); box-shadow: 0 14px 35px rgba(38,61,43,0.1), inset 0 0 0 1px rgba(255,255,255,0.6); border-color: rgba(38,61,43,0.2); }
+    .pill:hover::before{ opacity:1; }
+    .pill::after{display:none!important}
+
+    .hero{padding:100px 0 80px; position:relative; overflow:hidden}
+    .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:70px; align-items:center}
+    .eyebrow{display:flex; align-items:center; gap:12px; color:var(--olive); text-transform:uppercase; letter-spacing:0.2em; font-size:11px; font-weight:700; margin-bottom:28px; opacity:0; transform: translateY(20px)}
+    .eyebrow.animated{ animation: fadeUp 0.8s var(--transition) forwards; }
+    .eyebrow:before{content:""; width:40px; height:1.5px; background:var(--gold)}
+    h1{font-size:clamp(52px, 7vw, 100px); line-height:0.92; margin:0 0 28px; opacity:0; transform: translateY(30px)}
+    h1.animated{ animation: fadeUp 0.9s var(--transition) 0.15s forwards; }
+    .hero p{font-size:19px; line-height:1.7; color:var(--muted); max-width:560px; margin:0 0 36px; font-weight:400; opacity:0; transform: translateY(20px)}
+    .hero p.animated{ animation: fadeUp 0.8s var(--transition) 0.3s forwards; }
+    .actions{display:flex; gap:14px; flex-wrap:wrap; align-items:center; opacity:0; transform: translateY(20px)}
+    .actions.animated{ animation: fadeUp 0.8s var(--transition) 0.45s forwards; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      height:56px; padding:0 28px; border-radius:999px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      letter-spacing:0.01em; transition: all 0.35s var(--transition);
+      border:1px solid transparent; position:relative; overflow:hidden; cursor:pointer;
+    }
+    .btn-primary{
+      background: var(--ink); color:white;
+      box-shadow: 0 16px 40px rgba(29,36,31,0.18), 0 0 0 1px rgba(255,255,255,0.1) inset;
+    }
+    .btn-primary:hover{ transform: translateY(-3px) scale(1.02); box-shadow: 0 24px 55px rgba(29,36,31,0.25), 0 0 0 1px rgba(255,255,255,0.15) inset; }
+    .btn-primary:active{ transform: translateY(-1px) scale(0.98); }
+    .btn-ghost{
+      background: rgba(255,255,255,0.5); color:var(--ink); border-color: rgba(29,36,31,0.1);
+      backdrop-filter: blur(12px); box-shadow: 0 8px 24px rgba(29,36,31,0.04);
+    }
+    .btn-ghost:hover{ background: rgba(255,255,255,0.8); border-color: rgba(29,36,31,0.15); transform: translateY(-2px); box-shadow: 0 14px 35px rgba(29,36,31,0.08); }
+    .mini-stats{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:60px; max-width:640px; opacity:0; transform: translateY(20px); }
+    .mini-stats.animated{ animation: fadeUp 0.8s var(--transition) 0.6s forwards; }
+    .stat{
+      background: rgba(255,255,255,0.6); border:1px solid var(--line); border-radius:24px;
+      padding:24px 20px; box-shadow: 0 12px 40px rgba(38,61,43,0.05), inset 0 0 0 1px rgba(255,255,255,0.5);
+      backdrop-filter: blur(12px); transition: all 0.4s var(--transition); cursor: default;
+    }
+    .stat:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 50px rgba(38,61,43,0.1), inset 0 0 0 1px rgba(255,255,255,0.6); border-color: rgba(143,160,131,0.2); }
+    .stat b{display:block; font-size:32px; color:var(--moss); letter-spacing:-0.04em; font-weight:700; transition: transform 0.3s}
+    .stat:hover b{ transform: scale(1.05); }
+    .stat span{display:block; color:var(--muted); font-size:13px; line-height:1.4; margin-top:6px; font-weight:400}
+
+    .phone-stage{position:relative; min-height:720px; display:flex; align-items:center; justify-content:center; perspective: 1200px}
+    .halo{
+      position:absolute; width:480px; height:480px; border-radius:50%;
+      background: radial-gradient(circle, rgba(143,160,131,0.2), rgba(232,223,207,0.3) 45%, transparent 70%);
+      filter: blur(6px); animation: haloPulse 8s ease-in-out infinite;
+    }
+    @keyframes haloPulse{ 0%,100%{ transform: scale(1); opacity:0.8; } 50%{ transform: scale(1.08); opacity:1; } }
+    .orb{
+      position:absolute; border-radius:50%; background: rgba(255,255,255,0.6);
+      border:1px solid rgba(29,36,31,0.08); box-shadow: var(--shadow-soft), 0 0 40px rgba(143,160,131,0.15);
+      backdrop-filter: blur(20px); transition: all 0.5s var(--transition);
+    }
+    .orb:hover{ transform: scale(1.15)!important; }
+    .orb.one{width:120px; height:120px; left:6%; top:14%; display:grid; place-items:center; color:var(--olive); font-size:40px; animation: orbFloat1 6s ease-in-out infinite;}
+    .orb.two{width:90px; height:90px; right:10%; bottom:20%; display:grid; place-items:center; color:var(--clay); font-size:28px; animation: orbFloat2 7s ease-in-out infinite;}
+    .orb.three{width:70px; height:70px; left:15%; bottom:30%; display:grid; place-items:center; color:var(--gold); font-size:24px; animation: orbFloat3 5s ease-in-out infinite;}
+    @keyframes orbFloat1{ 0%,100%{ transform: translateY(0) rotate(0deg); } 50%{ transform: translateY(-20px) rotate(5deg); } }
+    @keyframes orbFloat2{ 0%,100%{ transform: translateY(0) rotate(0deg); } 50%{ transform: translateY(15px) rotate(-5deg); } }
+    @keyframes orbFloat3{ 0%,100%{ transform: translateY(0) rotate(0deg); } 50%{ transform: translateY(-15px) rotate(8deg); } }
+    .phone{
+      width:300px; height:640px; border-radius:48px; position:relative; z-index:3;
+      background: linear-gradient(145deg, #1e2b23, #0f1511); padding:11px;
+      box-shadow: 0 50px 100px rgba(29,36,31,0.3), 0 0 0 1px rgba(255,255,255,0.12), 0 0 80px rgba(143,160,131,0.1);
+      transform: rotate(3deg) translateZ(20px); transition: transform 0.6s var(--transition);
+      animation: phoneFloat 6s ease-in-out infinite;
+    }
+    .phone:hover{ transform: rotate(0deg) translateZ(40px) scale(1.02); }
+    @keyframes phoneFloat{ 0%,100%{ transform: rotate(3deg) translateY(0) translateZ(20px); } 50%{ transform: rotate(3deg) translateY(-15px) translateZ(20px); } }
+    .screen{height:100%; border-radius:40px; overflow:hidden; background: linear-gradient(180deg, #fff 0%, #f7f3ea 100%); position:relative}
+    .notch{position:absolute; top:10px; left:50%; transform:translateX(-50%); width:90px; height:26px; border-radius:999px; background:#111; z-index:4}
+    .app-top{padding:52px 22px 16px; display:flex; justify-content:space-between; align-items:center}
+    .avatar{width:40px; height:40px; border-radius:50%; background:linear-gradient(145deg,var(--sand),#fff); display:grid; place-items:center; color:var(--olive); font-weight:800; font-size:13px; border:1px solid rgba(38,61,43,0.1); transition: transform 0.3s}
+    .avatar:hover{ transform: scale(1.1) rotate(10deg); }
+    .menu-dot{width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid rgba(38,61,43,0.1); display:grid; place-items:center; cursor:pointer; transition: all 0.3s}
+    .menu-dot:hover{ background: var(--sand); transform: rotate(90deg); }
+    .app-copy{padding:0 22px}
+    .app-copy .kicker{font-size:10px; color:var(--olive); letter-spacing:0.18em; text-transform:uppercase; font-weight:800}
+    .app-copy h2{font-size:36px; line-height:0.95; margin:8px 0 14px}
+    .earth-card{
+      margin:18px 16px 0; padding:18px; border-radius:28px;
+      background: linear-gradient(135deg,#273d2b,#607553); color:white; min-height:200px;
+      position:relative; overflow:hidden; box-shadow: 0 20px 50px rgba(38,61,43,0.2);
+      transition: all 0.4s var(--transition);
+    }
+    .earth-card:hover{ transform: translateY(-4px) scale(1.02); box-shadow: 0 28px 60px rgba(38,61,43,0.25); }
+    .earth-card:before{content:""; position:absolute; width:220px; height:220px; border-radius:50%; border:1px solid rgba(255,255,255,0.18); right:-80px; top:-60px}
+    .earth-card:after{content:""; position:absolute; width:150px; height:150px; border-radius:50%; background:rgba(255,255,255,0.06); right:-40px; top:20px}
+    .earth-card small{position:relative; z-index:2; opacity:0.75; letter-spacing:0.12em; text-transform:uppercase; font-size:9px; font-weight:800}
+    .earth-card h3{position:relative; z-index:2; font-size:28px; line-height:1; margin:40px 0 6px}
+    .earth-card p{position:relative; z-index:2; font-size:11px; line-height:1.5; color:rgba(255,255,255,0.75); margin:0; max-width:180px}
+    .habit-row{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 16px}
+    .habit{
+      background: rgba(255,255,255,0.85); border:1px solid rgba(38,61,43,0.08); border-radius:22px;
+      padding:14px; min-height:110px; transition: all 0.3s var(--transition); cursor: default;
+    }
+    .habit:hover{ transform: translateY(-3px); box-shadow: 0 12px 30px rgba(38,61,43,0.08); border-color: rgba(143,160,131,0.2); }
+    .habit .icon{width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:var(--sand); margin-bottom:12px; font-size:16px; transition: transform 0.3s}
+    .habit:hover .icon{ transform: scale(1.15) rotate(10deg); }
+    .habit b{display:block; font-size:13px; margin-bottom:3px; font-weight:600}
+    .habit span{font-size:10px; color:var(--muted); line-height:1.4}
+    .bottom-nav{
+      position:absolute; left:16px; right:16px; bottom:14px; height:54px;
+      background: rgba(255,255,255,0.7); border:1px solid rgba(38,61,43,0.08); border-radius:999px;
+      display:flex; justify-content:space-around; align-items:center;
+      backdrop-filter: blur(14px); color:var(--olive); font-size:20px; transition: all 0.3s;
+    }
+    .bottom-nav span{ transition: all 0.3s; cursor:pointer; padding:8px 16px; border-radius:999px; }
+    .bottom-nav span:hover{ background: rgba(143,160,131,0.15); transform: scale(1.2); }
+
+    .section{padding:90px 0; position:relative}
+    .section-head{display:flex; align-items:end; justify-content:space-between; gap:28px; margin-bottom:48px}
+    .section-head h2{font-size:clamp(36px, 5vw, 68px); line-height:0.95; margin:0; max-width:700px; opacity:0; transform: translateY(30px)}
+    .section-head h2.animated{ animation: fadeUp 0.9s var(--transition) forwards; }
+    .section-head p{max-width:400px; color:var(--muted); line-height:1.7; margin:0; font-size:17px; opacity:0; transform: translateY(20px)}
+    .section-head p.animated{ animation: fadeUp 0.8s var(--transition) 0.15s forwards; }
+
+    .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+    .feature{
+      background: rgba(255,255,255,0.55); border:1px solid var(--line); border-radius:var(--radius);
+      padding:36px 32px; box-shadow: var(--shadow-soft), inset 0 0 0 1px rgba(255,255,255,0.5);
+      min-height:340px; position:relative; overflow:hidden; backdrop-filter: blur(16px);
+      transition: all 0.5s var(--transition); opacity:0; transform: translateY(40px);
+    }
+    .feature.animated{ animation: fadeUp 0.8s var(--transition) forwards; }
+    .feature:nth-child(1).animated{ animation-delay: 0.1s; }
+    .feature:nth-child(2).animated{ animation-delay: 0.2s; }
+    .feature:nth-child(3).animated{ animation-delay: 0.3s; }
+    .feature:hover{ transform: translateY(-8px) scale(1.02); box-shadow: 0 30px 70px rgba(29,36,31,0.12), inset 0 0 0 1px rgba(255,255,255,0.6); border-color: rgba(143,160,131,0.2); }
+    .feature:after{content:""; position:absolute; width:200px; height:200px; border-radius:50%; background:rgba(143,160,131,0.08); right:-80px; top:-80px; transition: all 0.5s}
+    .feature:hover:after{ transform: scale(1.3); background:rgba(143,160,131,0.12); }
+    .feature .num{font-size:11px; color:var(--gold); letter-spacing:0.18em; font-weight:800; text-transform:uppercase; transition: color 0.3s}
+    .feature:hover .num{ color: var(--olive); }
+    .feature h3{font-size:28px; line-height:1.05; margin:48px 0 16px; transition: transform 0.3s}
+    .feature:hover h3{ transform: translateX(4px); }
+    .feature p{color:var(--muted); line-height:1.65; margin:0; font-size:15px}
+
+    .editorial{display:grid; grid-template-columns:.9fr 1.1fr; gap:24px; align-items:stretch}
+    .image-panel{
+      min-height:540px; border-radius:40px; overflow:hidden;
+      background: linear-gradient(150deg, rgba(38,61,43,0.92), rgba(143,160,131,0.5)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900"><rect width="700" height="900" fill="%23d9cfbc"/><circle cx="220" cy="280" r="180" fill="%238fa083" opacity=".55"/><path d="M120 790 C220 450 330 330 590 120" stroke="%23ffffff" stroke-width="6" opacity=".55" fill="none"/><path d="M210 680 C270 450 360 320 600 220" stroke="%23263d2b" stroke-width="3" opacity=".30" fill="none"/><ellipse cx="350" cy="460" rx="120" ry="260" fill="%23ffffff" opacity=".12" transform="rotate(38 350 460)"/></svg>');
+      background-size:cover; display:flex; align-items:flex-end; padding:40px; color:white;
+      box-shadow: var(--shadow); position:relative; overflow:hidden;
+      transition: all 0.6s var(--transition); opacity:0; transform: translateX(-30px);
+    }
+    .image-panel.animated{ animation: fadeRight 0.9s var(--transition) forwards; }
+    .image-panel::before{ content:''; position:absolute; inset:0; background: linear-gradient(180deg, transparent 40%, rgba(29,36,31,0.6) 100%); transition: opacity 0.5s; }
+    .image-panel:hover::before{ opacity:0.8; }
+    .image-panel:hover{ transform: scale(1.01); }
+    .image-panel > div{ position:relative; z-index:2; }
+    .image-panel h3{font-size:clamp(32px, 4vw, 48px); line-height:0.96; margin:0 0 14px; transition: transform 0.4s var(--transition)}
+    .image-panel:hover h3{ transform: translateY(-4px); }
+    .image-panel p{max-width:340px; color:rgba(255,255,255,0.75); line-height:1.6; margin:0; font-size:15px}
+
+    .journal{display:grid; gap:14px}
+    .journal-item{
+      background: rgba(255,255,255,0.6); border:1px solid var(--line); border-radius:28px;
+      padding:24px; display:grid; grid-template-columns:80px 1fr; gap:20px; align-items:center;
+      backdrop-filter: blur(12px); transition: all 0.4s var(--transition);
+      opacity:0; transform: translateX(30px);
+    }
+    .journal-item.animated{ animation: fadeLeft 0.7s var(--transition) forwards; }
+    .journal-item:nth-child(1).animated{ animation-delay: 0.1s; }
+    .journal-item:nth-child(2).animated{ animation-delay: 0.2s; }
+    .journal-item:nth-child(3).animated{ animation-delay: 0.3s; }
+    .journal-item:nth-child(4).animated{ animation-delay: 0.4s; }
+    .journal-item:hover{ transform: translateX(8px) scale(1.01); box-shadow: 0 16px 45px rgba(29,36,31,0.08); border-color: rgba(143,160,131,0.2); background: rgba(255,255,255,0.8); }
+    .thumb{
+      width:80px; height:80px; border-radius:22px; background: linear-gradient(145deg,var(--sand),#fff);
+      display:grid; place-items:center; font-size:28px; transition: all 0.4s var(--transition);
+      border:1px solid rgba(38,61,43,0.08);
+    }
+    .journal-item:hover .thumb{ transform: scale(1.1) rotate(5deg); }
+    .journal-item span{font-size:11px; color:var(--olive); text-transform:uppercase; letter-spacing:0.16em; font-weight:800}
+    .journal-item h4{font-size:22px; margin:6px 0 8px; line-height:1.05; font-weight:400; transition: color 0.3s}
+    .journal-item:hover h4{ color: var(--olive); }
+    .journal-item p{font-size:14px; color:var(--muted); margin:0; line-height:1.5}
+
+    .cta{padding:100px 0 120px}
+    .cta-box{
+      border-radius:48px; background: linear-gradient(135deg,#18251c,#2d3f2d); color:white;
+      padding:70px; position:relative; overflow:hidden; box-shadow: 0 40px 100px rgba(29,36,31,0.2);
+      transition: all 0.6s var(--transition); opacity:0; transform: translateY(40px) scale(0.98);
+    }
+    .cta-box.animated{ animation: fadeUpScale 1s var(--transition) forwards; }
+    .cta-box:hover{ transform: translateY(-4px) scale(1.005); box-shadow: 0 50px 120px rgba(29,36,31,0.25); }
+    .cta-box:before{content:""; position:absolute; width:500px; height:500px; border-radius:50%; background:rgba(255,255,255,0.06); right:-180px; top:-180px; animation: ctaOrb1 15s ease-in-out infinite;}
+    .cta-box:after{content:""; position:absolute; width:280px; height:280px; border-radius:50%; border:1px solid rgba(255,255,255,0.12); right:80px; bottom:-100px; animation: ctaOrb2 12s ease-in-out infinite;}
+    @keyframes ctaOrb1{ 0%,100%{ transform: translate(0,0); } 50%{ transform: translate(-30px, 30px); } }
+    @keyframes ctaOrb2{ 0%,100%{ transform: translate(0,0) rotate(0deg); } 50%{ transform: translate(20px, -20px) rotate(45deg); } }
+    .cta-box h2{font-size:clamp(40px, 6vw, 76px); line-height:0.92; margin:0 0 24px; max-width:720px; position:relative; z-index:2}
+    .cta-box p{color:rgba(255,255,255,0.7); line-height:1.7; max-width:520px; margin:0 0 36px; position:relative; z-index:2; font-size:17px}
+    .cta-box .btn{ position:relative; z-index:2; background: rgba(255,255,255,0.95); color:var(--ink); box-shadow: 0 12px 35px rgba(0,0,0,0.15); }
+    .cta-box .btn:hover{ background: #fff; transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 50px rgba(0,0,0,0.2); }
+
+    footer{border-top:1px solid var(--line); padding:36px 0; color:var(--muted); font-size:14px; background: rgba(255,255,255,0.4); backdrop-filter: blur(10px)}
+    .foot{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap}
+    .foot a{color:var(--muted); text-decoration:none; transition: color 0.3s}
+    .foot a:hover{color:var(--olive)}
+
+    @keyframes fadeUp{ from{ opacity:0; transform: translateY(30px); } to{ opacity:1; transform: translateY(0); } }
+    @keyframes fadeUpScale{ from{ opacity:0; transform: translateY(40px) scale(0.98); } to{ opacity:1; transform: translateY(0) scale(1); } }
+    @keyframes fadeRight{ from{ opacity:0; transform: translateX(-30px); } to{ opacity:1; transform: translateX(0); } }
+    @keyframes fadeLeft{ from{ opacity:0; transform: translateX(30px); } to{ opacity:1; transform: translateX(0); } }
+
+    .scroll-progress{ position:fixed; top:0; left:0; height:2.5px; background: linear-gradient(90deg, var(--sage), var(--gold), var(--clay)); z-index:200; width:0%; transition: width 0.1s linear; box-shadow: 0 0 10px rgba(143,160,131,0.5); }
+
+    /* ============ GAMES ============ */
+    .games-section{padding:80px 0 100px; position:relative}
+    .games-section .section-head{margin-bottom:40px}
+    .games-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:24px; }
+    @media(max-width:768px){ .games-grid{grid-template-columns:1fr} }
+
+    .game-card{
+      background: rgba(255,255,255,0.55); border:1px solid var(--line); border-radius:var(--radius);
+      padding:32px; box-shadow: var(--shadow-soft), inset 0 0 0 1px rgba(255,255,255,0.5);
+      backdrop-filter: blur(16px); transition: all 0.5s var(--transition); position:relative; overflow:hidden;
+      opacity:0; transform: translateY(40px);
+    }
+    .game-card.animated{ animation: fadeUp 0.8s var(--transition) forwards; }
+    .game-card:nth-child(1).animated{ animation-delay: 0.1s; }
+    .game-card:nth-child(2).animated{ animation-delay: 0.2s; }
+    .game-card:nth-child(3).animated{ animation-delay: 0.3s; }
+    .game-card:nth-child(4).animated{ animation-delay: 0.4s; }
+    .game-card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 30px 70px rgba(29,36,31,0.12), inset 0 0 0 1px rgba(255,255,255,0.6); border-color: rgba(143,160,131,0.25); }
+    .game-card::before{ content:''; position:absolute; top:-60px; right:-60px; width:160px; height:160px; border-radius:50%; background:rgba(143,160,131,0.06); transition: all 0.5s; }
+    .game-card:hover::before{ transform: scale(1.4); background:rgba(143,160,131,0.1); }
+    .game-header{ display:flex; align-items:center; gap:14px; margin-bottom:24px; position:relative; z-index:2; }
+    .game-icon{
+      width:52px; height:52px; border-radius:16px; display:grid; place-items:center; font-size:26px;
+      background: linear-gradient(135deg, var(--sand), #fff); border:1px solid rgba(38,61,43,0.1);
+      box-shadow: 0 8px 24px rgba(38,61,43,0.08); transition: all 0.3s var(--transition);
+    }
+    .game-card:hover .game-icon{ transform: scale(1.1) rotate(8deg); }
+    .game-title{font-size:22px; font-weight:600; color:var(--ink); letter-spacing:-0.02em}
+    .game-desc{font-size:14px; color:var(--muted); margin-top:4px}
+
+    /* Sorting Game */
+    .sorting-game{position:relative; z-index:2}
+    .sorting-bins{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-bottom:20px; }
+    .sort-bin{
+      height:90px; border-radius:20px; border:2px dashed rgba(29,36,31,0.15);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+      font-size:11px; font-weight:600; color:var(--muted); transition: all 0.3s var(--transition); cursor:default; background: rgba(255,255,255,0.4);
+    }
+    .sort-bin.drag-over{ border-color: var(--olive); background: rgba(143,160,131,0.15); transform: scale(1.05); }
+    .sort-bin.correct{ border-color: var(--sage); background: rgba(143,160,131,0.2); color: var(--olive); }
+    .sort-bin.wrong{ border-color: #c45; background: rgba(204,68,85,0.1); color: #c45; animation: shake 0.4s; }
+    @keyframes shake{ 0%,100%{ transform: translateX(0); } 25%{ transform: translateX(-6px); } 75%{ transform: translateX(6px); } }
+    .sort-items{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; min-height:60px; }
+    .sort-item{
+      width:60px; height:60px; border-radius:16px; background: linear-gradient(145deg, #fff, var(--sand));
+      border:1px solid rgba(38,61,43,0.1); display:grid; place-items:center; font-size:28px; cursor:grab;
+      box-shadow: 0 4px 12px rgba(29,36,31,0.08); transition: all 0.2s var(--transition); user-select:none; position:relative;
+    }
+    .sort-item:hover{ transform: scale(1.1) translateY(-4px); box-shadow: 0 8px 24px rgba(29,36,31,0.12); }
+    .sort-item.dragging{ opacity:0.5; transform: scale(1.15); cursor:grabbing; }
+    .sort-item.sorted{ animation: popIn 0.4s var(--transition); opacity:0.6; pointer-events:none; }
+    @keyframes popIn{ 0%{ transform: scale(0.5); opacity:0; } 60%{ transform: scale(1.2); } 100%{ transform: scale(1); opacity:0.6; } }
+    .game-score{ text-align:center; margin-top:16px; font-size:14px; color:var(--muted); }
+    .game-score b{color:var(--olive); font-size:20px; font-weight:700}
+    .game-reset{ margin-top:12px; text-align:center; }
+    .game-reset button{ background: transparent; border:1px solid rgba(29,36,31,0.15); border-radius:999px; padding:8px 20px; font-size:12px; color:var(--muted); cursor:pointer; transition: all 0.3s; font-family: inherit; }
+    .game-reset button:hover{ background: var(--ink); color: white; border-color: var(--ink); }
+
+    /* Breathing */
+    .breath-container{ display:flex; flex-direction:column; align-items:center; gap:24px; position:relative; z-index:2; }
+    .breath-circle{
+      width:180px; height:180px; border-radius:50%; background: linear-gradient(135deg, var(--sage), var(--olive));
+      display:grid; place-items:center; position:relative;
+      box-shadow: 0 20px 60px rgba(79,101,72,0.3), inset 0 0 40px rgba(255,255,255,0.1); transition: all 0.1s linear;
+    }
+    .breath-circle.inhale{ animation: breatheIn 4s ease-in-out forwards; }
+    .breath-circle.exhale{ animation: breatheOut 4s ease-in-out forwards; }
+    @keyframes breatheIn{ 0%{ transform: scale(1); box-shadow: 0 20px 60px rgba(79,101,72,0.3); } 100%{ transform: scale(1.35); box-shadow: 0 30px 80px rgba(79,101,72,0.4), 0 0 60px rgba(143,160,131,0.3); } }
+    @keyframes breatheOut{ 0%{ transform: scale(1.35); box-shadow: 0 30px 80px rgba(79,101,72,0.4); } 100%{ transform: scale(1); box-shadow: 0 20px 60px rgba(79,101,72,0.3); } }
+    .breath-inner{ width:120px; height:120px; border-radius:50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); display:grid; place-items:center; border:1px solid rgba(255,255,255,0.2); }
+    .breath-text{font-size:18px; color:white; font-weight:600; letter-spacing:0.1em; text-transform:uppercase}
+    .breath-timer{font-size:48px; font-weight:700; color:var(--olive); font-family: 'Space Grotesk', monospace;}
+    .breath-instruction{font-size:14px; color:var(--muted); text-align:center; max-width:280px; line-height:1.6}
+    .breath-btn{ background: var(--ink); color:white; border:none; border-radius:999px; padding:14px 32px; font-size:14px; font-weight:600; cursor:pointer; transition: all 0.3s var(--transition); font-family: inherit; box-shadow: 0 12px 30px rgba(29,36,31,0.15); }
+    .breath-btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 40px rgba(29,36,31,0.2); }
+    .breath-btn:active{ transform: scale(0.97); }
+    .breath-btn.active{ background: var(--olive); }
+
+    /* Carbon Calc */
+    .calc-container{position:relative; z-index:2}
+    .calc-question{margin-bottom:20px}
+    .calc-question-text{font-size:16px; font-weight:600; color:var(--ink); margin-bottom:14px; line-height:1.5}
+    .calc-options{display:grid; gap:8px}
+    .calc-option{
+      padding:14px 18px; border-radius:16px; background: rgba(255,255,255,0.6); border:1.5px solid rgba(29,36,31,0.08);
+      cursor:pointer; transition: all 0.25s var(--transition); font-size:14px; color:var(--ink);
+      display:flex; align-items:center; gap:12px;
+    }
+    .calc-option:hover{ border-color: rgba(143,160,131,0.4); background: rgba(255,255,255,0.9); transform: translateX(4px); }
+    .calc-option.selected{ border-color: var(--olive); background: rgba(143,160,131,0.12); box-shadow: 0 4px 16px rgba(79,101,72,0.1); }
+    .calc-option .opt-dot{ width:20px; height:20px; border-radius:50%; border:2px solid rgba(29,36,31,0.15); display:grid; place-items:center; transition: all 0.2s; flex-shrink:0; }
+    .calc-option.selected .opt-dot{ border-color: var(--olive); background: var(--olive); }
+    .calc-option.selected .opt-dot::after{ content:''; width:6px; height:6px; border-radius:50%; background:white; }
+    .calc-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:24px; }
+    .calc-nav button{ background: var(--ink); color:white; border:none; border-radius:999px; padding:12px 24px; font-size:13px; font-weight:600; cursor:pointer; transition: all 0.3s; font-family: inherit; }
+    .calc-nav button:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(29,36,31,0.15); }
+    .calc-nav button:disabled{ opacity:0.4; cursor:not-allowed; transform:none; box-shadow:none; }
+    .calc-progress{ height:4px; background: rgba(29,36,31,0.08); border-radius:999px; overflow:hidden; margin-bottom:20px; }
+    .calc-progress-fill{ height:100%; background: linear-gradient(90deg, var(--sage), var(--olive)); border-radius:999px; transition: width 0.5s var(--transition); }
+    .calc-result{ text-align:center; padding:20px 0; }
+    .calc-result-score{ font-size:56px; font-weight:700; color:var(--olive); font-family: 'Space Grotesk', monospace; line-height:1; }
+    .calc-result-label{font-size:14px; color:var(--muted); margin-top:8px; margin-bottom:16px}
+    .calc-result-bar{ height:12px; border-radius:999px; background: rgba(29,36,31,0.08); overflow:hidden; margin:0 auto 20px; max-width:300px; }
+    .calc-result-fill{ height:100%; border-radius:999px; transition: width 1s var(--transition) 0.3s; }
+    .calc-result-fill.low{ background: linear-gradient(90deg, #c45, #d97); }
+    .calc-result-fill.mid{ background: linear-gradient(90deg, var(--gold), #d4b); }
+    .calc-result-fill.high{ background: linear-gradient(90deg, var(--sage), var(--olive)); }
+    .calc-result-tip{ font-size:13px; color:var(--muted); line-height:1.6; max-width:320px; margin:0 auto; padding:16px; border-radius:16px; background: rgba(143,160,131,0.08); }
+    .calc-result-tip b{color:var(--olive)}
+
+    /* Memory */
+    .memory-game{position:relative; z-index:2}
+    .memory-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; max-width:340px; margin:0 auto; }
+    .memory-card{
+      aspect-ratio:1; border-radius:16px; background: linear-gradient(145deg, var(--sand), #fff);
+      border:1px solid rgba(38,61,43,0.1); display:grid; place-items:center; font-size:32px; cursor:pointer;
+      box-shadow: 0 4px 12px rgba(29,36,31,0.06); transition: all 0.3s var(--transition); position:relative; overflow:hidden;
+    }
+    .memory-card:hover{ transform: translateY(-3px); box-shadow: 0 8px 24px rgba(29,36,31,0.1); }
+    .memory-card.flipped{ background: linear-gradient(135deg, #fff, var(--sand)); }
+    .memory-card.matched{ background: linear-gradient(135deg, var(--sage), var(--olive)); opacity:0.85; transform: scale(0.95); pointer-events:none; }
+    .memory-card.matched .card-front{ color: white; }
+    .memory-card .card-back, .memory-card .card-front{ position:absolute; inset:0; display:grid; place-items:center; transition: opacity 0.3s, transform 0.3s; }
+    .memory-card .card-back{ opacity:1; transform: rotateY(0deg); font-size:20px; color:var(--muted); }
+    .memory-card .card-front{ opacity:0; transform: rotateY(180deg); }
+    .memory-card.flipped .card-back{ opacity:0; transform: rotateY(180deg); }
+    .memory-card.flipped .card-front{ opacity:1; transform: rotateY(0deg); }
+    .memory-card.shake{ animation: shake 0.4s; }
+    .memory-status{ text-align:center; margin-top:16px; font-size:14px; color:var(--muted); }
+    .memory-status b{color:var(--olive); font-size:18px}
+    .memory-reset{text-align:center; margin-top:12px}
+
+    /* Plant Grower */
+    .plant-game{position:relative; z-index:2}
+    .plant-pot{ width:200px; height:200px; margin:0 auto 20px; position:relative; }
+    .pot-body{ position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:120px; height:70px; background: linear-gradient(180deg, var(--clay), #9a6b4a); border-radius: 0 0 20px 20px; box-shadow: 0 8px 24px rgba(29,36,31,0.15); }
+    .pot-rim{ position:absolute; bottom:60px; left:50%; transform:translateX(-50%); width:140px; height:16px; background: linear-gradient(180deg, var(--clay), #a07050); border-radius:8px; box-shadow: 0 2px 8px rgba(29,36,31,0.1); }
+    .plant-stem{ position:absolute; bottom:76px; left:50%; transform:translateX(-50%); width:6px; background: linear-gradient(180deg, var(--sage), var(--olive)); border-radius:999px; transition: height 0.5s var(--transition); height:0; transform-origin: bottom center; }
+    .plant-leaf{ position:absolute; width:24px; height:16px; background: var(--sage); border-radius: 0 50% 0 50%; opacity:0; transition: all 0.4s var(--transition); transform-origin: bottom left; }
+    .plant-leaf.left{ transform: rotate(-30deg) scale(0); left:-18px; }
+    .plant-leaf.right{ transform: rotate(30deg) scale(0); right:-18px; border-radius: 50% 0 50% 0; transform-origin: bottom right; }
+    .plant-leaf.grown{ opacity:1; transform: rotate(-30deg) scale(1); }
+    .plant-leaf.right.grown{ transform: rotate(30deg) scale(1); }
+    .plant-flower{ position:absolute; top:-20px; left:50%; transform:translateX(-50%) scale(0); width:30px; height:30px; background: radial-gradient(circle, var(--gold), var(--clay)); border-radius:50%; opacity:0; transition: all 0.5s var(--transition) 0.2s; box-shadow: 0 0 20px rgba(185,161,107,0.4); }
+    .plant-flower.bloom{ opacity:1; transform:translateX(-50%) scale(1); }
+    .plant-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .plant-btn{ padding:10px 20px; border-radius:999px; border:1.5px solid rgba(29,36,31,0.12); background: rgba(255,255,255,0.7); font-size:13px; font-weight:600; color:var(--ink); cursor:pointer; transition: all 0.3s; font-family: inherit; display:flex; align-items:center; gap:6px; }
+    .plant-btn:hover{ transform: translateY(-2px); box-shadow: 0 6px 18px rgba(29,36,31,0.08); border-color: var(--sage); }
+    .plant-btn:active{ transform: scale(0.95); }
+    .plant-btn:disabled{ opacity:0.4; cursor:not-allowed; transform:none; }
+    .plant-level{ text-align:center; margin-top:16px; font-size:14px; color:var(--muted); }
+    .plant-level b{color:var(--olive)}
+
+    @media(max-width:960px){
+      .hero-grid,.editorial{grid-template-columns:1fr}
+      .phone-stage{min-height:600px; margin-top:40px}
+      .cards{grid-template-columns:1fr}
+      .section-head{display:block}
+      .section-head p{margin-top:18px}
+      .nav-links a:not(.pill){display:none}
+      .mini-stats{grid-template-columns:1fr}
+      .cta-box{padding:40px 28px}
+      .phone{transform: rotate(0deg) translateZ(20px); width:280px; height:580px}
+      .phone:hover{ transform: rotate(0deg) translateZ(30px) scale(1.02); }
+      .orb.one{left:2%; top:8%}
+      .orb.two{right:4%; bottom:15%}
+      .orb.three{display:none}
+      .journal-item{grid-template-columns:1fr; text-align:center; gap:16px}
+      .thumb{margin:0 auto}
+      .games-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="mesh-bg"></div>
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+
+  <nav class="nav" id="navbar">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#"><span class="mark"></span><strong>The Better Earthlings</strong></a>
+      <div class="nav-links">
+        <a href="#rituals">Rituals</a>
+        <a href="#journal">Journal</a>
+        <a href="#games">Play</a>
+        <a href="#impact">Impact</a>
+        <a class="pill" href="mailto:hello@thebetterearthlings.com">Join the Waitlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow" data-animate>✦ Premium sustainable lifestyle</div>
+          <h1 class="serif" data-animate>Live better.<br/>Tread lighter.</h1>
+          <p data-animate>The Better Earthlings reimagined as a premium lifestyle app — a calm, elegant companion for conscious habits, sustainable shopping, mindful homes, workplace action, and everyday earth-positive choices.</p>
+          <div class="actions" data-animate>
+            <a class="btn btn-primary" href="#features">Explore the Concept →</a>
+            <a class="btn btn-ghost" href="https://thebetterearthlings.com/">Visit Current Site</a>
+          </div>
+          <div class="mini-stats" id="impact" data-animate>
+            <div class="stat"><b class="mono">01</b><span>Daily rituals for a lower-waste home</span></div>
+            <div class="stat"><b class="mono">30%</b><span>Ink saving insight with smarter font choices</span></div>
+            <div class="stat"><b class="mono">∞</b><span>Small choices, compounding planetary impact</span></div>
+          </div>
+        </div>
+
+        <div class="phone-stage" aria-label="Premium mobile app mockup">
+          <div class="halo"></div>
+          <div class="orb one">☘</div>
+          <div class="orb two">◐</div>
+          <div class="orb three">✦</div>
+          <div class="phone" id="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="app-top">
+                <div class="avatar">BE</div>
+                <div class="menu-dot">⋯</div>
+              </div>
+              <div class="app-copy">
+                <div class="kicker">Today's Earth Ritual</div>
+                <h2 class="serif">A softer way<br/>to live.</h2>
+              </div>
+              <div class="earth-card">
+                <small>Mindful living score</small>
+                <h3 class="serif">82% gentler</h3>
+                <p>Track conscious swaps, plant-forward choices, and low-waste routines with quiet luxury.</p>
+              </div>
+              <div class="habit-row" id="rituals">
+                <div class="habit"><div class="icon">♻</div><b>Reuse</b><span>Gift wrap with fabric, paper, or preserved botanicals.</span></div>
+                <div class="habit"><div class="icon">🌿</div><b>Grow</b><span>Keep herbs and mosquito-repelling plants at home.</span></div>
+              </div>
+              <div class="bottom-nav"><span>⌂</span><span>◎</span><span>✦</span><span>☼</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="serif" data-animate>Earthiness, without losing elegance.</h2>
+          <p data-animate>A premium visual language for a greener lifestyle brand: warm whites, sage greens, editorial typography, generous breathing room, and subtle organic details.</p>
+        </div>
+        <div class="cards">
+          <article class="feature" data-animate><div class="num">Lifestyle</div><h3 class="serif">Curated eco rituals</h3><p>Personalized everyday actions across home, wardrobe, gifting, food, travel, and mindful consumption.</p></article>
+          <article class="feature" data-animate><div class="num">Corporate</div><h3 class="serif">Conscious workplaces</h3><p>Guided programs for offices to reduce waste, save energy, and build an environmentally conscious culture.</p></article>
+          <article class="feature" data-animate><div class="num">Journal</div><h3 class="serif">Depth with beauty</h3><p>Environmental education made sophisticated — from mangroves and soil to sustainable fashion.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="journal">
+      <div class="wrap editorial">
+        <div class="image-panel" data-animate>
+          <div>
+            <h3 class="serif">The new luxury is responsibility.</h3>
+            <p>A brand system that feels premium enough for a lifestyle app, yet grounded enough to belong to the earth.</p>
+          </div>
+        </div>
+        <div class="journal">
+          <div class="journal-item" data-animate><div class="thumb">🎁</div><div><span>DIY</span><h4 class="serif">Sustainable Gift Wrapping 101</h4><p>Turn conscious gifting into a beautiful ritual with materials that feel intentional and earth-friendly.</p></div></div>
+          <div class="journal-item" data-animate><div class="thumb">👕</div><div><span>Wardrobe</span><h4 class="serif">Make your wardrobe sustainable</h4><p>Buy less, choose better, repair more, and build a closet with permanence.</p></div></div>
+          <div class="journal-item" data-animate><div class="thumb">🌱</div><div><span>Home</span><h4 class="serif">Plants that protect your space</h4><p>Grow useful plants at home and make greener living feel practical, serene, and beautiful.</p></div></div>
+          <div class="journal-item" data-animate><div class="thumb">🌊</div><div><span>In depth</span><h4 class="serif">Mangroves against climate change</h4><p>Long-form environmental storytelling designed for modern, premium reading experiences.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERACTIVE GAMES ============ -->
+    <section class="games-section" id="games">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 class="serif" data-animate>Play your way to a greener life.</h2>
+          <p data-animate>Interactive experiences that make sustainability fun, mindful, and rewarding — no downloads, no apps, just pure browser magic.</p>
+        </div>
+
+        <div class="games-grid">
+
+          <!-- GAME 1: WASTE SORTING -->
+          <div class="game-card" data-animate>
+            <div class="game-header">
+              <div class="game-icon">♻</div>
+              <div><div class="game-title">Waste Sorter</div><div class="game-desc">Drag items to the right bin</div></div>
+            </div>
+            <div class="sorting-game" id="sortingGame">
+              <div class="sorting-bins">
+                <div class="sort-bin" data-type="recycle"><span style="font-size:24px">♻</span>Recycle</div>
+                <div class="sort-bin" data-type="compost"><span style="font-size:24px">🍂</span>Compost</div>
+                <div class="sort-bin" data-type="trash"><span style="font-size:24px">🗑</span>Trash</div>
+              </div>
+              <div class="sort-items" id="sortItems"></div>
+              <div class="game-score">Sorted: <b id="sortScore">0</b> / <span id="sortTotal">0</span></div>
+              <div class="game-reset"><button onclick="initSortingGame()">↻ Reset Game</button></div>
+            </div>
+          </div>
+
+          <!-- GAME 2: BREATHING EXERCISE -->
+          <div class="game-card" data-animate>
+            <div class="game-header">
+              <div class="game-icon">🌬</div>
+              <div><div class="game-title">Mindful Breath</div><div class="game-desc">Sync your breath with the circle</div></div>
+            </div>
+            <div class="breath-container" id="breathContainer">
+              <div class="breath-circle" id="breathCircle">
+                <div class="breath-inner">
+                  <span class="breath-text" id="breathText">Ready</span>
+                </div>
+              </div>
+              <div class="breath-timer" id="breathTimer">4</div>
+              <div class="breath-instruction">Follow the rhythm. Inhale as the circle expands, exhale as it contracts. A simple 4-7-8 breathing technique for calm.</div>
+              <button class="breath-btn" id="breathBtn" onclick="toggleBreathing()">Start Breathing</button>
+            </div>
+          </div>
+
+          <!-- GAME 3: CARBON FOOTPRINT CALCULATOR -->
+          <div class="game-card" data-animate>
+            <div class="game-header">
+              <div class="game-icon">🌍</div>
+              <div><div class="game-title">Carbon Calculator</div><div class="game-desc">Discover your eco footprint</div></div>
+            </div>
+            <div class="calc-container" id="calcContainer">
+              <div class="calc-progress"><div class="calc-progress-fill" id="calcProgress" style="width:0%"></div></div>
+              <div id="calcQuestionArea"></div>
+              <div class="calc-nav">
+                <button id="calcPrev" onclick="calcPrev()" disabled>← Back</button>
+                <button id="calcNext" onclick="calcNext()" disabled>Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- GAME 4: ECO MEMORY MATCH -->
+          <div class="game-card" data-animate>
+            <div class="game-header">
+              <div class="game-icon">🧠</div>
+              <div><div class="game-title">Eco Memory</div><div class="game-desc">Match the sustainability pairs</div></div>
+            </div>
+            <div class="memory-game" id="memoryGame">
+              <div class="memory-grid" id="memoryGrid"></div>
+              <div class="memory-status">Moves: <b id="memoryMoves">0</b> &nbsp;|&nbsp; Matches: <b id="memoryMatches">0</b>/8</div>
+              <div class="memory-reset"><button onclick="initMemoryGame()">↻ New Game</button></div>
+            </div>
+          </div>
+
+          <!-- GAME 5: VIRTUAL PLANT GROWER -->
+          <div class="game-card" data-animate>
+            <div class="game-header">
+              <div class="game-icon">🌱</div>
+              <div><div class="game-title">Plant Nurturer</div><div class="game-desc">Grow a virtual garden</div></div>
+            </div>
+            <div class="plant-game" id="plantGame">
+              <div class="plant-pot">
+                <div class="pot-body"></div>
+                <div class="pot-rim"></div>
+                <div class="plant-stem" id="plantStem"></div>
+                <div class="plant-leaf left" id="leafL1" style="bottom:100px"></div>
+                <div class="plant-leaf right" id="leafR1" style="bottom:120px"></div>
+                <div class="plant-leaf left" id="leafL2" style="bottom:140px"></div>
+                <div class="plant-leaf right" id="leafR2" style="bottom:160px"></div>
+                <div class="plant-flower" id="plantFlower" style="bottom:180px"></div>
+              </div>
+              <div class="plant-actions">
+                <button class="plant-btn" id="btnWater" onclick="waterPlant()">💧 Water</button>
+                <button class="plant-btn" id="btnSun" onclick="sunPlant()">☀️ Sunlight</button>
+                <button class="plant-btn" id="btnFert" onclick="fertPlant()">🧪 Fertilize</button>
+              </div>
+              <div class="plant-level">Level: <b id="plantLevel">0</b> / 10 &nbsp;|&nbsp; Health: <b id="plantHealth">100</b>%</div>
+            </div>
+          </div>
+
+          <!-- GAME 6: SUSTAINABILITY QUIZ -->
+          <div class="game-card" data-animate>
+            <div class="game-header">
+              <div class="game-icon">❓</div>
+              <div><div class="game-title">Eco Quiz</div><div class="game-desc">Test your green knowledge</div></div>
+            </div>
+            <div class="calc-container" id="quizContainer">
+              <div class="calc-progress"><div class="calc-progress-fill" id="quizProgress" style="width:0%"></div></div>
+              <div id="quizQuestionArea"></div>
+              <div class="calc-nav">
+                <button id="quizPrev" onclick="quizPrev()" disabled>← Back</button>
+                <button id="quizNext" onclick="quizNext()" disabled>Next →</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <div class="cta-box" data-animate>
+          <h2 class="serif">We changed. It's your turn now.</h2>
+          <p>A premium Better Earthlings app concept for people and companies ready to make greener choices feel simple, aspirational, and beautifully human.</p>
+          <a class="btn" href="mailto:hello@thebetterearthlings.com">Let's Talk — hello@thebetterearthlings.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© The Better Earthlings — Premium App Concept</span>
+      <span>+91 8017883733 · Kolkata, India</span>
+    </div>
+  </footer>
+
+  <script>
+
+    // === INTERSECTION OBSERVER ===
+    const observerOptions = { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('animated'); observer.unobserve(entry.target); } });
+    }, observerOptions);
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+    // === SCROLL PROGRESS ===
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (scrollTop / docHeight * 100) + '%';
+    }, { passive: true });
+
+    // === NAVBAR ===
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // === PARALLAX PHONE ===
+    const phone = document.getElementById('phone');
+    document.addEventListener('mousemove', (e) => {
+      if (window.innerWidth > 960) {
+        const x = (e.clientX / window.innerWidth - 0.5) * 10;
+        const y = (e.clientY / window.innerHeight - 0.5) * 10;
+        phone.style.transform = 'rotate(' + (3 + x * 0.3) + 'deg) translateY(' + y + 'px) translateZ(30px)';
+      }
+    });
+
+    // === SMOOTH SCROLL ===
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // ============ GAME 1: WASTE SORTING ============
+    const sortItems = [
+      { emoji: '📰', name: 'Newspaper', type: 'recycle' },
+      { emoji: '🍌', name: 'Banana Peel', type: 'compost' },
+      { emoji: '🥤', name: 'Plastic Cup', type: 'recycle' },
+      { emoji: '🍕', name: 'Pizza Box', type: 'compost' },
+      { emoji: '🔋', name: 'Battery', type: 'trash' },
+      { emoji: '🥚', name: 'Eggshell', type: 'compost' },
+      { emoji: '📦', name: 'Cardboard', type: 'recycle' },
+      { emoji: '🍬', name: 'Candy Wrapper', type: 'trash' },
+    ];
+    let sortScore = 0;
+    let sortSorted = 0;
+
+    function initSortingGame() {
+      sortScore = 0; sortSorted = 0;
+      document.getElementById('sortScore').textContent = '0';
+      document.getElementById('sortTotal').textContent = sortItems.length;
+      const container = document.getElementById('sortItems');
+      container.innerHTML = '';
+      const shuffled = [...sortItems].sort(() => Math.random() - 0.5);
+      shuffled.forEach((item, i) => {
+        const el = document.createElement('div');
+        el.className = 'sort-item';
+        el.draggable = true;
+        el.dataset.type = item.type;
+        el.dataset.name = item.name;
+        el.textContent = item.emoji;
+        el.title = item.name;
+        el.addEventListener('dragstart', (e) => { el.classList.add('dragging'); e.dataTransfer.setData('type', item.type); e.dataTransfer.setData('name', item.name); });
+        el.addEventListener('dragend', () => el.classList.remove('dragging'));
+        // Touch support
+        el.addEventListener('touchstart', handleTouchStart, {passive: false});
+        el.addEventListener('touchmove', handleTouchMove, {passive: false});
+        el.addEventListener('touchend', handleTouchEnd, {passive: false});
+        container.appendChild(el);
+      });
+      document.querySelectorAll('.sort-bin').forEach(bin => {
+        bin.classList.remove('correct', 'wrong');
+        bin.addEventListener('dragover', (e) => { e.preventDefault(); bin.classList.add('drag-over'); });
+        bin.addEventListener('dragleave', () => bin.classList.remove('drag-over'));
+        bin.addEventListener('drop', (e) => {
+          e.preventDefault(); bin.classList.remove('drag-over');
+          const draggedType = e.dataTransfer.getData('type');
+          const binType = bin.dataset.type;
+          if (draggedType === binType) {
+            bin.classList.add('correct'); setTimeout(() => bin.classList.remove('correct'), 600);
+            sortScore++; sortSorted++;
+            document.getElementById('sortScore').textContent = sortScore;
+            const draggedEl = document.querySelector('.sort-item.dragging');
+            if (draggedEl) { draggedEl.classList.add('sorted'); draggedEl.style.opacity = '0.3'; draggedEl.draggable = false; }
+          } else {
+            bin.classList.add('wrong'); setTimeout(() => bin.classList.remove('wrong'), 600);
+          }
+        });
+      });
+    }
+
+    // Touch drag support for mobile
+    let touchEl = null, touchClone = null;
+    function handleTouchStart(e) {
+      touchEl = e.target.closest('.sort-item');
+      if (!touchEl || touchEl.classList.contains('sorted')) return;
+      touchClone = touchEl.cloneNode(true);
+      touchClone.style.position = 'fixed'; touchClone.style.zIndex = '1000'; touchClone.style.pointerEvents = 'none';
+      touchClone.style.width = '60px'; touchClone.style.height = '60px'; touchClone.style.opacity = '0.8';
+      document.body.appendChild(touchClone);
+      updateTouchPos(e);
+      touchEl.classList.add('dragging');
+    }
+    function handleTouchMove(e) { e.preventDefault(); if (touchClone) updateTouchPos(e); }
+    function updateTouchPos(e) {
+      const touch = e.touches[0];
+      touchClone.style.left = (touch.clientX - 30) + 'px';
+      touchClone.style.top = (touch.clientY - 30) + 'px';
+      document.querySelectorAll('.sort-bin').forEach(b => {
+        const rect = b.getBoundingClientRect();
+        if (touch.clientX >= rect.left && touch.clientX <= rect.right && touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+          b.classList.add('drag-over');
+        } else { b.classList.remove('drag-over'); }
+      });
+    }
+    function handleTouchEnd(e) {
+      if (!touchEl) return;
+      const touch = e.changedTouches[0];
+      document.querySelectorAll('.sort-bin').forEach(bin => {
+        const rect = bin.getBoundingClientRect();
+        if (touch.clientX >= rect.left && touch.clientX <= rect.right && touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+          const draggedType = touchEl.dataset.type;
+          const binType = bin.dataset.type;
+          if (draggedType === binType) {
+            bin.classList.add('correct'); setTimeout(() => bin.classList.remove('correct'), 600);
+            sortScore++; sortSorted++;
+            document.getElementById('sortScore').textContent = sortScore;
+            touchEl.classList.add('sorted'); touchEl.style.opacity = '0.3'; touchEl.draggable = false;
+          } else { bin.classList.add('wrong'); setTimeout(() => bin.classList.remove('wrong'), 600); }
+        }
+        bin.classList.remove('drag-over');
+      });
+      if (touchClone) { touchClone.remove(); touchClone = null; }
+      touchEl.classList.remove('dragging'); touchEl = null;
+    }
+
+    // ============ GAME 2: BREATHING ============
+    let breathing = false, breathPhase = 0, breathInterval = null, breathTimer = null;
+    function toggleBreathing() {
+      const btn = document.getElementById('breathBtn');
+      const circle = document.getElementById('breathCircle');
+      const text = document.getElementById('breathText');
+      const timer = document.getElementById('breathTimer');
+      if (breathing) {
+        breathing = false; clearInterval(breathInterval); clearInterval(breathTimer);
+        btn.textContent = 'Start Breathing'; btn.classList.remove('active');
+        circle.classList.remove('inhale', 'exhale'); circle.style.transform = 'scale(1)';
+        text.textContent = 'Ready'; timer.textContent = '4';
+        return;
+      }
+      breathing = true; btn.textContent = 'Stop'; btn.classList.add('active');
+      let count = 4; let phase = 'inhale';
+      text.textContent = 'Inhale'; circle.classList.add('inhale');
+      breathTimer = setInterval(() => {
+        count--;
+        if (count <= 0) {
+          if (phase === 'inhale') { phase = 'hold'; count = 7; text.textContent = 'Hold'; circle.classList.remove('inhale'); }
+          else if (phase === 'hold') { phase = 'exhale'; count = 8; text.textContent = 'Exhale'; circle.classList.add('exhale'); }
+          else { phase = 'inhale'; count = 4; text.textContent = 'Inhale'; circle.classList.remove('exhale'); circle.classList.add('inhale'); }
+        }
+        timer.textContent = count;
+      }, 1000);
+    }
+
+    // ============ GAME 3: CARBON CALCULATOR ============
+    const calcQuestions = [
+      { q: 'How do you usually commute?', options: [
+        { text: 'Drive alone (gas car)', score: 10 },
+        { text: 'Carpool / Public transit', score: 5 },
+        { text: 'Bike / Walk / Electric', score: 1 }
+      ]},
+      { q: 'How often do you eat meat?', options: [
+        { text: 'Daily', score: 10 },
+        { text: 'A few times a week', score: 6 },
+        { text: 'Rarely / Never', score: 2 }
+      ]},
+      { q: 'How do you shop for clothes?', options: [
+        { text: 'Fast fashion, new each season', score: 10 },
+        { text: 'Mix of new and secondhand', score: 5 },
+        { text: 'Thrift / Repair / Minimal', score: 1 }
+      ]},
+      { q: 'How do you handle food waste?', options: [
+        { text: 'Throw most leftovers away', score: 10 },
+        { text: 'Compost some, trash some', score: 5 },
+        { text: 'Compost all / Zero waste', score: 1 }
+      ]},
+      { q: 'What is your home energy source?', options: [
+        { text: 'Coal / Natural gas', score: 10 },
+        { text: 'Mixed grid', score: 5 },
+        { text: 'Solar / Renewable', score: 1 }
+      ]}
+    ];
+    let calcIndex = 0, calcAnswers = [], calcSelected = null;
+
+    function renderCalcQuestion() {
+      const q = calcQuestions[calcIndex];
+      const area = document.getElementById('calcQuestionArea');
+      document.getElementById('calcProgress').style.width = ((calcIndex / calcQuestions.length) * 100) + '%';
+      document.getElementById('calcPrev').disabled = calcIndex === 0;
+      document.getElementById('calcNext').disabled = calcAnswers[calcIndex] === undefined;
+      let html = '<div class="calc-question"><div class="calc-question-text">' + (calcIndex + 1) + '. ' + q.q + '</div><div class="calc-options">';
+      q.options.forEach((opt, i) => {
+        const selected = calcAnswers[calcIndex] === i ? 'selected' : '';
+        html += '<div class="calc-option ' + selected + '" onclick="selectCalcOption(' + i + ')"><div class="opt-dot"></div>' + opt.text + '</div>';
+      });
+      html += '</div></div>';
+      if (calcIndex === calcQuestions.length) {
+        const totalScore = calcAnswers.reduce((sum, ansIdx, qIdx) => sum + calcQuestions[qIdx].options[ansIdx].score, 0);
+        const maxScore = calcQuestions.length * 10;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+        let grade = 'high', label = 'Eco Warrior', tip = 'Amazing! You are living a remarkably sustainable lifestyle. Keep inspiring others!';
+        if (percentage > 60) { grade = 'mid'; label = 'Green Sprout'; tip = 'You are on the right path! Small swaps like biking more or reducing meat can make a big difference.'; }
+        if (percentage > 80) { grade = 'low'; label = 'Starting Point'; tip = 'Every journey begins with awareness. Try one new habit this week — composting or thrifting!'; }
+        html = '<div class="calc-result"><div class="calc-result-score">' + (100 - percentage) + '%</div><div class="calc-result-label">Your Eco Score: <b>' + label + '</b></div><div class="calc-result-bar"><div class="calc-result-fill ' + grade + '" style="width:' + (100 - percentage) + '%"></div></div><div class="calc-result-tip"><b>Tip:</b> ' + tip + '</div></div>';
+        document.getElementById('calcNext').textContent = 'Restart';
+        document.getElementById('calcNext').disabled = false;
+        document.getElementById('calcNext').onclick = function() { calcIndex = 0; calcAnswers = []; document.getElementById('calcNext').textContent = 'Next →'; document.getElementById('calcNext').onclick = calcNext; renderCalcQuestion(); };
+      }
+      area.innerHTML = html;
+    }
+    function selectCalcOption(i) { calcAnswers[calcIndex] = i; calcSelected = i; renderCalcQuestion(); }
+    function calcNext() { if (calcIndex < calcQuestions.length) { calcIndex++; renderCalcQuestion(); } }
+    function calcPrev() { if (calcIndex > 0) { calcIndex--; renderCalcQuestion(); } }
+
+    // ============ GAME 4: MEMORY MATCH ============
+    const memoryEmojis = ['🌿', '♻', '🌍', '💧', '🌳', '☀️', '🍃', '🔋'];
+    let memoryCards = [], memoryFlipped = [], memoryMatched = 0, memoryMoves = 0, memoryLock = false;
+
+    function initMemoryGame() {
+      memoryFlipped = []; memoryMatched = 0; memoryMoves = 0; memoryLock = false;
+      document.getElementById('memoryMoves').textContent = '0';
+      document.getElementById('memoryMatches').textContent = '0';
+      const grid = document.getElementById('memoryGrid');
+      grid.innerHTML = '';
+      const pairs = [...memoryEmojis, ...memoryEmojis].sort(() => Math.random() - 0.5);
+      memoryCards = pairs.map((emoji, i) => ({ id: i, emoji, matched: false }));
+      pairs.forEach((emoji, i) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.index = i;
+        card.innerHTML = '<div class="card-back">?</div><div class="card-front">' + emoji + '</div>';
+        card.addEventListener('click', () => flipMemoryCard(i));
+        grid.appendChild(card);
+      });
+    }
+    function flipMemoryCard(i) {
+      if (memoryLock || memoryCards[i].matched || memoryFlipped.includes(i)) return;
+      const cardEls = document.querySelectorAll('.memory-card');
+      cardEls[i].classList.add('flipped');
+      memoryFlipped.push(i);
+      if (memoryFlipped.length === 2) {
+        memoryMoves++;
+        document.getElementById('memoryMoves').textContent = memoryMoves;
+        memoryLock = true;
+        const [a, b] = memoryFlipped;
+        if (memoryCards[a].emoji === memoryCards[b].emoji) {
+          memoryCards[a].matched = true; memoryCards[b].matched = true;
+          memoryMatched++;
+          document.getElementById('memoryMatches').textContent = memoryMatched;
+          setTimeout(() => {
+            cardEls[a].classList.add('matched');
+            cardEls[b].classList.add('matched');
+            memoryFlipped = []; memoryLock = false;
+            if (memoryMatched === 8) {
+              setTimeout(() => alert('You won in ' + memoryMoves + ' moves!'), 300);
+            }
+          }, 400);
+        } else {
+          setTimeout(() => {
+            cardEls[a].classList.add('shake'); cardEls[b].classList.add('shake');
+            setTimeout(() => {
+              cardEls[a].classList.remove('flipped', 'shake');
+              cardEls[b].classList.remove('flipped', 'shake');
+              memoryFlipped = []; memoryLock = false;
+            }, 400);
+          }, 600);
+        }
+      }
+    }
+
+    // ============ GAME 5: PLANT GROWER ============
+    let plantLevel = 0, plantHealth = 100;
+    function updatePlantVisual() {
+      const stem = document.getElementById('plantStem');
+      const leaves = ['leafL1', 'leafR1', 'leafL2', 'leafR2'];
+      const flower = document.getElementById('plantFlower');
+      const h = plantLevel * 18;
+      stem.style.height = h + 'px';
+      leaves.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (plantLevel >= (i + 1) * 2 + 1) el.classList.add('grown');
+      });
+      if (plantLevel >= 10) flower.classList.add('bloom');
+      document.getElementById('plantLevel').textContent = plantLevel;
+      document.getElementById('plantHealth').textContent = plantHealth;
+      document.getElementById('btnWater').disabled = plantLevel >= 10;
+      document.getElementById('btnSun').disabled = plantLevel >= 10;
+      document.getElementById('btnFert').disabled = plantLevel >= 10;
+    }
+    function waterPlant() { if (plantLevel < 10) { plantLevel++; plantHealth = Math.min(100, plantHealth + 5); updatePlantVisual(); } }
+    function sunPlant() { if (plantLevel < 10) { plantLevel++; plantHealth = Math.min(100, plantHealth + 3); updatePlantVisual(); } }
+    function fertPlant() { if (plantLevel < 10) { plantLevel += 2; plantHealth = Math.min(100, plantHealth + 8); if (plantLevel > 10) plantLevel = 10; updatePlantVisual(); } }
+
+    // ============ GAME 6: ECO QUIZ ============
+    const quizQuestions = [
+      { q: 'Which material takes the longest to decompose?', options: ['Paper', 'Glass', 'Banana peel', 'Cotton'], correct: 1, fact: 'Glass never decomposes — it can last millions of years in a landfill.' },
+      { q: 'What is the most sustainable protein source?', options: ['Beef', 'Chicken', 'Lentils', 'Pork'], correct: 2, fact: 'Lentils require 50x less water than beef per gram of protein.' },
+      { q: 'Which action saves the most CO2 annually?', options: ['Using LED bulbs', 'Going car-free', 'Recycling paper', 'Using a reusable bag'], correct: 1, fact: 'Going car-free saves about 2.4 tons of CO2 per year on average.' },
+      { q: 'What percentage of plastic is actually recycled globally?', options: ['9%', '25%', '50%', '75%'], correct: 0, fact: 'Only about 9% of all plastic ever produced has been recycled.' },
+      { q: 'Which is NOT a renewable energy source?', options: ['Solar', 'Wind', 'Natural gas', 'Hydro'], correct: 2, fact: 'Natural gas is a fossil fuel and emits CO2 when burned.' }
+    ];
+    let quizIndex = 0, quizAnswers = [], quizScore = 0;
+
+    function renderQuizQuestion() {
+      const q = quizQuestions[quizIndex];
+      const area = document.getElementById('quizQuestionArea');
+      document.getElementById('quizProgress').style.width = ((quizIndex / quizQuestions.length) * 100) + '%';
+      document.getElementById('quizPrev').disabled = quizIndex === 0;
+      document.getElementById('quizNext').disabled = quizAnswers[quizIndex] === undefined;
+      let html = '<div class="calc-question"><div class="calc-question-text">' + (quizIndex + 1) + '. ' + q.q + '</div><div class="calc-options">';
+      q.options.forEach((opt, i) => {
+        let cls = '';
+        if (quizAnswers[quizIndex] !== undefined) {
+          if (i === q.correct) cls = 'selected';
+          else if (i === quizAnswers[quizIndex] && i !== q.correct) cls = '';
+        } else if (quizAnswers[quizIndex] === i) { cls = 'selected'; }
+        html += '<div class="calc-option ' + cls + '" onclick="selectQuizOption(' + i + ')" style="' + (quizAnswers[quizIndex] !== undefined && i !== q.correct && i === quizAnswers[quizIndex] ? 'border-color:#c45;background:rgba(204,68,85,0.08);' : '') + '"><div class="opt-dot"></div>' + opt + '</div>';
+      });
+      html += '</div>';
+      if (quizAnswers[quizIndex] !== undefined) {
+        const isCorrect = quizAnswers[quizIndex] === q.correct;
+        html += '<div style="margin-top:14px;padding:12px 16px;border-radius:12px;background:' + (isCorrect ? 'rgba(143,160,131,0.12)' : 'rgba(204,68,85,0.08)') + ';font-size:13px;color:var(--muted);line-height:1.5;"><b style="color:' + (isCorrect ? 'var(--olive)' : '#c45') + '">' + (isCorrect ? 'Correct!' : 'Not quite.') + '</b> ' + q.fact + '</div>';
+      }
+      html += '</div>';
+      if (quizIndex === quizQuestions.length) {
+        html = '<div class="calc-result"><div class="calc-result-score">' + quizScore + '/' + quizQuestions.length + '</div><div class="calc-result-label">You scored <b>' + quizScore + '</b> out of ' + quizQuestions.length + '</div><div class="calc-result-bar"><div class="calc-result-fill high" style="width:' + (quizScore / quizQuestions.length * 100) + '%"></div></div><div class="calc-result-tip">' + (quizScore === quizQuestions.length ? 'Perfect! You are a true Earthling.' : quizScore >= 3 ? 'Great job! Keep learning and growing.' : 'Keep exploring — every fact learned is a step toward change.') + '</div></div>';
+        document.getElementById('quizNext').textContent = 'Restart';
+        document.getElementById('quizNext').disabled = false;
+        document.getElementById('quizNext').onclick = function() { quizIndex = 0; quizAnswers = []; quizScore = 0; document.getElementById('quizNext').textContent = 'Next →'; document.getElementById('quizNext').onclick = quizNext; renderQuizQuestion(); };
+      }
+      area.innerHTML = html;
+    }
+    function selectQuizOption(i) {
+      if (quizAnswers[quizIndex] !== undefined) return;
+      quizAnswers[quizIndex] = i;
+      if (i === quizQuestions[quizIndex].correct) quizScore++;
+      renderQuizQuestion();
+    }
+    function quizNext() { if (quizIndex < quizQuestions.length) { quizIndex++; renderQuizQuestion(); } }
+    function quizPrev() { if (quizIndex > 0) { quizIndex--; renderQuizQuestion(); } }
+
+    // Initialize all games
+    initSortingGame();
+    renderCalcQuestion();
+    initMemoryGame();
+    updatePlantVisual();
+    renderQuizQuestion();
+  </script>
+</body>
+</html>
